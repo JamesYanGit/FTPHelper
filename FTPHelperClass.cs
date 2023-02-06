@@ -24,12 +24,12 @@ namespace FTPHelper
         }
         public bool onload(string file)
         {
-            //构造一个web服务器的请求对象
+            
             FtpWebRequest ftp;
-            //实例化一个文件对象
+            
             FileInfo f = new FileInfo(file);
             ftp = (FtpWebRequest)FtpWebRequest.Create(new Uri(@"ftp://"+_hostServer + _hostDirectory + f.Name));
-            //创建用户名和密码
+            
             ftp.Credentials = new NetworkCredential(_hostName, _hostPsw);
             ftp.KeepAlive = false;
             ftp.Method = WebRequestMethods.Ftp.UploadFile;
@@ -40,7 +40,7 @@ namespace FTPHelper
             int contentLen;
             try
             {
-                //获得请求对象的输入流
+                
                 FileStream fs = f.OpenRead();
                 Stream sw = ftp.GetRequestStream();
                 contentLen = fs.Read(buff, 0, buffLength);
@@ -66,7 +66,7 @@ namespace FTPHelper
             {
                 FtpWebRequest ftp;
                 ftp = (FtpWebRequest)FtpWebRequest.Create(new Uri(@"ftp://" + _hostServer + _hostDirectory + fileName));
-                //指定用户名和密码
+                
                 ftp.Credentials = new NetworkCredential(_hostName, _hostPsw);
                 WebResponse wr = ftp.GetResponse();
                 StreamReader sr = new StreamReader(wr.GetResponseStream(), System.Text.Encoding.Default);
@@ -90,7 +90,7 @@ namespace FTPHelper
         {
             FtpWebRequest ftp;
             ftp = (FtpWebRequest)FtpWebRequest.Create(new Uri(@"ftp://" + _hostServer + _hostDirectory));
-            //指定用户名和密码
+            
             ftp.Credentials = new NetworkCredential(_hostName, _hostPsw);
             ftp.Method=WebRequestMethods.Ftp.PrintWorkingDirectory;
             ftp.KeepAlive = false;
